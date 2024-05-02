@@ -254,4 +254,54 @@ function azan_custom_featured_image_text($content, $post_id) {
 }
 add_filter('admin_post_thumbnail_html', 'azan_custom_featured_image_text', 10, 2);
 
+add_theme_support( 'wp-block-styles' );
+function azan_custom_theme_block_styles() {
+    // Register custom block styles
+    register_block_style(
+        'core/button', // Block name
+        array(
+            'name'         => 'custom-button-style', // Style name
+            'label'        => __( 'Custom Button', 'bloggyhassanazan' ), // Style label
+            'inline_style' => '.wp-block-button__link { background-color: #ff0000; color: #ffffff; }', // Custom CSS
+        )
+    );
+}
+add_action( 'init', 'azan_custom_theme_block_styles' );
+
+add_theme_support( 'block-patterns' );
+function azan_custom_theme_block_patterns() {
+    // Register custom block patterns
+    register_block_pattern(
+        'custom-pattern', // Pattern name
+        array(
+            'title'       => __( 'Custom Pattern', 'bloggyhassanazan' ), // Pattern title
+            'description' => __( 'This is a custom block pattern.', 'bloggyhassanazan' ), // Pattern description
+            'content'     => '<!-- Your block pattern content here -->', // Pattern content
+        )
+    );
+}
+add_action( 'init', 'azan_custom_theme_block_patterns' );
+
+// Add support for responsive embeds
+add_theme_support( 'responsive-embeds' );
+
+// Add support for HTML5 markup elements
+add_theme_support( 'html5', array( 'search-form', 'comment-form', 'comment-list', 'gallery', 'caption' ) );
+
+// Add support for custom logo
+add_theme_support( 'custom-logo' );
+
+// Add support for custom header
+add_theme_support( 'custom-header' );
+
+// Add support for custom background
+add_theme_support( 'custom-background' );
+
+// Add support for wide alignments
+add_theme_support( 'align-wide' );
+
+// Add editor styles
+add_editor_style();
+
+add_theme_support( 'title-tag' );
 ?>

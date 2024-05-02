@@ -18,10 +18,9 @@ body {
     color: #545454;
 }
 
-a:link, a:visited {
-    color: #4285f4;
+.mr-2 > a {
+    color: #f1f3ff;
 }
-
 p {
     line-height: 1.7em;
 }
@@ -82,4 +81,48 @@ article.post:last-of-type {
 .white-link {
     color: white;
 }
+/* Style for WordPress caption */
+.wp-caption {
+    margin-bottom: 1.5em;
+    max-width: 100%;
+    padding: 0.2em;
+    text-align: center;
+}
 
+/* Style for WordPress caption text */
+.wp-caption-text {
+    margin: 0;
+}
+
+/* Style for WordPress gallery caption */
+.gallery-caption {
+    margin: 0;
+    padding: 0.5em;
+}
+
+/* Style for author's comment */
+.bypostauthor {
+    border-top: 1px solid #ddd;
+    margin-top: 20px;
+    padding-top: 20px;
+}
+
+/* Style for right-aligned content */
+.alignright {
+    float: right;
+    margin: 0 0 1.5em 1.5em;
+}
+
+/* Style for left-aligned content */
+.alignleft {
+    float: left;
+    margin: 0 1.5em 1.5em 0;
+}
+
+/* Style for centered content */
+.aligncenter {
+    clear: both;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}

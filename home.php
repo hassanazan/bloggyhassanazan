@@ -40,7 +40,7 @@ if ($is_first_page) {
                         $image_url = !empty($featured_image) ? $featured_image : $default_image_url;
                     ?>
                         <div class="carousel-item <?php echo $active; ?>">
-                            <img class="w-100" style="height: 900px; object-fit: cover;" src="<?php echo esc_url($image_url); ?>" alt="<?php the_title_attribute(); ?>">
+                            <img class="w-100" style="height: 400px; object-fit: cover;" src="<?php echo esc_url($image_url); ?>" alt="<?php the_title_attribute(); ?>">
                             <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                                 <h2 class="mb-3 text-white font-weight-bold"><?php the_title(); ?></h2>
                                 <div class="d-flex text-white">
@@ -93,7 +93,9 @@ $query = new WP_Query($query_args);
                     // Use default image if post thumbnail is empty
                     $thumbnail_url = !empty($post_thumbnail_url) ? $post_thumbnail_url : $default_image_url;
                     ?>
-                    <img class="img-fluid mb-4 mb-md-0" src="<?php echo esc_url($thumbnail_url); ?>" alt="<?php the_title_attribute(); ?>">
+                    <div class="blog-image-wrapper" style="max-width: 273px; max-height: 241px; overflow: hidden;">
+                        <img class="img-fluid" src="<?php echo esc_url($thumbnail_url); ?>" alt="<?php the_title_attribute(); ?>" style="width: 100%; height: auto;">
+                    </div>
                 </div>
                 <div class="col-md-7">
                     <h3 class="mt-md-4 px-md-3 mb-2 py-2 bg-white font-weight-bold"><?php the_title(); ?></h3>
@@ -128,4 +130,17 @@ $query = new WP_Query($query_args);
     ?>
 </div>
 <!-- Blog List End -->
+<div class="comments-pagination">
+    <?php
+    // Check if comment pagination is needed
+    $paginate_comments_args = array(
+        'prev_text' => '&laquo; ' . esc_html__('Previous', 'bloggyhassanazan'),
+        'next_text' => esc_html__('Next', 'bloggyhassanazan') . ' &raquo;',
+    );
+
+    paginate_comments_links($paginate_comments_args);
+    ?>
+</div>
+
+
 <?php get_footer(); ?>

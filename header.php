@@ -16,14 +16,12 @@ $instagram_link = get_theme_mod('instagram_link', 'https://instagram.com/example
 <html <?php language_attributes(); ?>>
 <head>
     <meta charset="<?php bloginfo('charset'); ?>">
-    <title><?php echo esc_html(get_bloginfo('name')) . ' - ' . esc_html(get_bloginfo('description')); ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="keywords" content="<?php bloginfo('name'); ?>">
     <meta name="description" content="<?php bloginfo('description'); ?>">
 
-<link rel="icon" href="<?php echo esc_url(get_template_directory_uri()); ?>/img/favicon.ico">
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-<link href="<?php echo esc_url(get_template_directory_uri()); ?>/css/all.min.css" rel="stylesheet">
+<link href="<?php echo esc_url(get_template_directory_uri()); ?>/lib/fa/css/all.min.css" rel="stylesheet">
 <link href="<?php echo esc_url(get_template_directory_uri()); ?>/css/style.css" rel="stylesheet">
 <link href="<?php echo esc_url(get_template_directory_uri()); ?>/style.css" rel="stylesheet">
 
@@ -51,29 +49,40 @@ $instagram_link = get_theme_mod('instagram_link', 'https://instagram.com/example
     </div>
     <div class="content">
         <!-- Navbar Start -->
-        <div class="container p-0">
-            <nav class="navbar navbar-expand-lg bg-secondary navbar-dark">
-                <a href="<?php echo esc_url(home_url('/')); ?>" class="navbar-brand d-block d-lg-none"><?php echo esc_html(get_bloginfo('name')); ?></a>
-                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-                    <div class="navbar-nav m-auto">
-                        <?php
-                        // Check if the menu exists and has items
-                        if (has_nav_menu('primary_menu')) {
-                            wp_nav_menu(array(
-                                'theme_location' => 'primary_menu',
-                                'container' => '',
-                                'menu_class' => 'navbar-nav m-auto',
-                                'items_wrap' => '%3$s',
-                                'fallback_cb' => false, // Disable fallback menu
-                                'walker' => new azan_WPDocs_Walker_Nav_Menu(),
-                            ));
-                        }
-                        ?>
-                    </div>
-                </div>
-            </nav>
+<div class="container p-0">
+    <nav class="navbar navbar-expand-lg bg-secondary navbar-dark">
+        <a href="<?php echo esc_url(home_url('/')); ?>" class="navbar-brand d-block d-lg-none"><?php echo esc_html(get_bloginfo('name')); ?></a>
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+            <div class="navbar-nav m-auto">
+                <?php
+                // Check if the menu exists and has items
+                if (has_nav_menu('primary_menu')) {
+                    wp_nav_menu(array(
+                        'theme_location' => 'primary_menu',
+                        'container' => '',
+                        'menu_class' => 'navbar-nav m-auto',
+                        'items_wrap' => '%3$s',
+                        'fallback_cb' => false, // Disable fallback menu
+                        'walker' => new azan_WPDocs_Walker_Nav_Menu(),
+                    ));
+                }
+                ?>
+            </div>
+            
+            <!-- Search Input -->
+<form class="form-inline my-2 my-lg-0" action="<?php echo esc_url(home_url('/')); ?>">
+    <div class="input-group">
+        <div class="input-group-prepend">
+            <span class="input-group-text"><i class="fas fa-search"></i></span>
         </div>
-        <!-- Navbar End -->
+        <input class="form-control" type="search" placeholder="Search" aria-label="Search" name="s">
+    </div>
+</form>
+<!-- End Search Input -->
+        </div>
+    </nav>
+</div>
+<!-- Navbar End -->
