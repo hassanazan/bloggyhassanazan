@@ -304,4 +304,49 @@ add_theme_support( 'align-wide' );
 add_editor_style();
 
 add_theme_support( 'title-tag' );
+
+function azan_my_theme_enqueue_scripts() {
+    // Enqueue jQuery
+    wp_enqueue_script('jquery');
+
+    // Enqueue custom scripts
+    wp_enqueue_script('custom-script', get_template_directory_uri() . '/js/jquery-3.4.1.min.js', array('jquery'), '3.4.1', true);
+    wp_enqueue_script('bootstrap-script', get_template_directory_uri() . '/js/bootstrap.bundle.min.js', array('jquery'), '4.0', true);
+    wp_enqueue_script('easing-script', get_template_directory_uri() . '/lib/easing/easing.min.js', array(), '1.0', true);
+    wp_enqueue_script('waypoints-script', get_template_directory_uri() . '/lib/waypoints/waypoints.min.js', array('jquery'), '1.0', true);
+    wp_enqueue_script('contact-validation-script', get_template_directory_uri() . '/mail/jqBootstrapValidation.min.js', array('jquery'), '1.0', true);
+    wp_enqueue_script('contact-script', get_template_directory_uri() . '/mail/contact.js', array('jquery'), '1.0', true);
+    wp_enqueue_script('main-script', get_template_directory_uri() . '/js/main.js', array('jquery'), '1.0', true);
+}
+add_action('wp_enqueue_scripts', 'azan_my_theme_enqueue_scripts');
+
+function enqueue_custom_scripts() {
+    // Enqueue custom script
+    wp_enqueue_script('custom-script', get_template_directory_uri() . '/js/custom-script.js', array(), '1.0', true);
+
+    // Localize the script with a unique name
+    wp_localize_script('custom-script', 'toggleReplyForm', array(
+        'ajax_url' => admin_url('admin-ajax.php'),
+        'nonce' => wp_create_nonce('toggle_reply_form_nonce'),
+    ));
+}
+
+add_action('wp_enqueue_scripts', 'enqueue_custom_scripts');
+
+function azan_theme_register_sidebars() {
+    register_sidebar( array(
+        'name'          => esc_html__( 'Primary Sidebar', 'bloggyhassanazan' ),
+        'id'            => 'primary-sidebar',
+        'description'   => esc_html__( 'Widgets added here will appear in the primary sidebar.', 'bloggyhassanazan' ),
+        'before_widget' => '<div id="%1$s" class="widget %2$s">',
+        'after_widget'  => '</div>',
+        'before_title'  => '<h2 class="widget-title">',
+        'after_title'   => '</h2>',
+    ) );
+
+    // You can register more sidebars by repeating the above code with different parameters
+}
+
+add_action( 'widgets_init', 'azan_theme_register_sidebars' );
+
 ?>
