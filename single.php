@@ -77,127 +77,18 @@ while (have_posts()) : the_post();
                 ?>
             </div>
 
-            <div class="col-12 py-4">
-                <h3 class="mb-4 font-weight-bold"><?php comments_number(__('No Comments', 'bloggyhassanazan'), __('1 Comment', 'bloggyhassanazan'), __('% Comments', 'bloggyhassanazan')); ?></h3>
-                <!-- Dynamic Comments -->
-                <?php
-                // Get comments for the current post
-                $comments = get_comments(array(
-                    'post_id' => get_the_ID(),
-                    'status' => 'approve',
-                ));
-
-                // Loop through each comment
-                foreach ($comments as $comment) :
-                    //var_dump($comment);
-                    if ($comment->comment_parent == 0) {
-                        // This is a parent comment
-                        ?>
-                        <div class="media mb-4">
-                            <img src="<?php echo esc_url(get_avatar_url($comment->comment_author_email)); ?>" alt="<?php esc_attr_e('Image', 'bloggyhassanazan'); ?>" class="mr-3 mt-1 rounded-circle" style="width:60px;">
-                            <div class="media-body">
-                                <h4><?php echo esc_html($comment->comment_author); ?> <small><i><?php echo esc_html(date('d M Y', strtotime($comment->comment_date))); ?></i></small></h4>
-                                <p><?php echo esc_html($comment->comment_content); ?></p>
-                                <button class="btn btn-sm btn-light" onclick="toggleReplyForm(<?php echo $comment->comment_ID; ?>)"><?php esc_html_e('Reply', 'bloggyhassanazan'); ?></button>
-                                <div id="reply-form-<?php echo $comment->comment_ID; ?>" style="display: none;">
-                                    <!-- Reply Form -->
-                                    <?php
-                                    comment_form(array(
-                                        'title_reply' => __('Leave a Reply', 'bloggyhassanazan'),
-                                        'title_reply_to' => __('Leave a Reply to %s', 'bloggyhassanazan'),
-                                        'comment_notes_after' => '',
-                                        'comment_field' => '<div class="form-group"><label for="comment-' . $comment->comment_ID . '">' . __('Comment', 'bloggyhassanazan') . '</label><textarea id="comment-' . $comment->comment_ID . '" name="comment" cols="45" rows="8" aria-required="true" class="form-control"></textarea></div>',
-                                        'class_submit' => 'btn btn-primary',
-                                        'submit_field' => '<p class="form-submit"><input name="submit" type="submit" id="submit" class="btn btn-primary" value="' . esc_attr__('Post Comment', 'bloggyhassanazan') . '"> <input type="hidden" name="comment_post_ID" value="' . $comment->comment_post_ID . '" id="comment_post_ID"> <input type="hidden" name="comment_parent" id="comment_parent" value="' . $comment->comment_ID . '"> </p>',
-
-                                        //'comment_parent' => $comment->comment_ID // Set the parent comment ID
-                                    ));
-                                    ?>
-                                    <!-- End Reply Form -->
-                                </div>
-                                <?php
-                                // Display replies for this parent comment
-                                foreach ($comments as $reply) {
-                                    if ($reply->comment_parent == $comment->comment_ID) {
-                                        ?>
-                                        <div class="media mb-4 ml-5">
-                                            <img src="<?php echo esc_url(get_avatar_url($reply->comment_author_email)); ?>" alt="<?php esc_attr_e('Image', 'bloggyhassanazan'); ?>" class="mr-3 mt-1 rounded-circle" style="width:60px;">
-                                            <div class="media-body">
-                                                <h4><?php echo esc_html($reply->comment_author); ?> <small><i><?php echo esc_html(date('d M Y', strtotime($reply->comment_date))); ?></i></small></h4>
-                                                <p><?php echo esc_html($reply->comment_content); ?></p>
-                                                <!-- Optionally add reply button for nested replies -->
-                                            </div>
-                                        </div>
-                                        <?php
-                                    }
-                                }
-                                ?>
-                            </div>
-                        </div>
-                        <?php
-                    }
-                endforeach;
-                ?>
-                <!-- Custom HTML Ends -->
-                <script>
-                    function toggleReplyForm(commentID) {
-                        var replyForm = document.getElementById('reply-form-' + commentID);
-                        if (replyForm.style.display === 'none') {
-                            replyForm.style.display = 'block';
-                        } else {
-                            replyForm.style.display = 'none';
-                        }
-                    }
-                </script>
-            </div>
-
-            <div class="col-12">
-                <h3 class="mb-4 font-weight-bold"><?php esc_html_e('Leave a comment', 'bloggyhassanazan'); ?></h3>
-                <!-- Reply Form -->
-                <?php
-                $commenter = wp_get_current_commenter();
-                $req = get_option('require_name_email');
-                $aria_req = ($req ? " aria-required='true'" : '');
-
-                comment_form(array(
-                    'title_reply' => __('Leave a Reply', 'bloggyhassanazan'),
-                    'title_reply_to' => __('Leave a Reply to %s', 'bloggyhassanazan'),
-                    'comment_notes_after' => '',
-                    'class_submit' => 'btn btn-primary',
-                    'fields' => array(
-                        'author' =>
-                            '<div class="form-group">' .
-                            '<label for="author">' . __('Name', 'bloggyhassanazan') . ($req ? ' <span class="required">*</span>' : '') . '</label> ' .
-                            '<input id="author" name="author" type="text" value="' . esc_attr($commenter['comment_author']) . '" size="30"' . $aria_req . ' class="form-control" /></div>',
-                        'email' =>
-                            '<div class="form-group">' .
-                            '<label for="email">' . __('Email', 'bloggyhassanazan') . ($req ? ' <span class="required">*</span>' : '') . '</label> ' .
-                            '<input id="email" name="email" type="email" value="' . esc_attr($commenter['comment_author_email']) . '" size="30"' . $aria_req . ' class="form-control" /></div>',
-                        'comment_parent' => '<input type="hidden" name="comment_parent" id="comment_parent" value="' . (isset($comment_parent) ? $comment_parent : 0) . '" />',
-                    ),
-                ));
-                ?>
-                <!-- End Reply Form -->
-            </div>
-
-
+            <?php
+            // Check if comments are open or we have at least one comment.
+            if (comments_open() || get_comments_number()) :
+                comments_template();
+            endif;
+            ?>
+            
         </div>
     </div>
 <?php
 endwhile;
 
-// Start the loop.
-while (have_posts()) : the_post();
 
-    // Include the template part for the content.
-    get_template_part('template-parts/content', get_post_format());
-
-    // If comments are open or we have at least one comment, load up the comment template.
-    if (comments_open() || get_comments_number()) :
-        comments_template();
-    endif;
-
-// End the loop.
-endwhile;
 get_footer();
 ?>

@@ -1,4 +1,8 @@
 <?php
+
+
+require_once("walker_class.php");
+
 function azan_custom_theme_assets() {
     // Enqueue Open Sans font from Google Fonts
     wp_enqueue_style('open-sans', 'https://fonts.googleapis.com/css2?family=Open+Sans:300;400;600;700;800&display=swap');
@@ -317,27 +321,15 @@ function azan_my_theme_enqueue_scripts() {
     wp_enqueue_script('contact-validation-script', get_template_directory_uri() . '/mail/jqBootstrapValidation.min.js', array('jquery'), '1.0', true);
     wp_enqueue_script('contact-script', get_template_directory_uri() . '/mail/contact.js', array('jquery'), '1.0', true);
     wp_enqueue_script('main-script', get_template_directory_uri() . '/js/main.js', array('jquery'), '1.0', true);
+    wp_enqueue_script( 'comment-reply' );
 }
 add_action('wp_enqueue_scripts', 'azan_my_theme_enqueue_scripts');
 
-function enqueue_custom_scripts() {
-    // Enqueue custom script
-    wp_enqueue_script('custom-script', get_template_directory_uri() . '/js/custom-script.js', array(), '1.0', true);
-
-    // Localize the script with a unique name
-    wp_localize_script('custom-script', 'toggleReplyForm', array(
-        'ajax_url' => admin_url('admin-ajax.php'),
-        'nonce' => wp_create_nonce('toggle_reply_form_nonce'),
-    ));
-}
-
-add_action('wp_enqueue_scripts', 'enqueue_custom_scripts');
-
 function azan_theme_register_sidebars() {
     register_sidebar( array(
-        'name'          => esc_html__( 'Primary Sidebar', 'bloggyhassanazan' ),
-        'id'            => 'primary-sidebar',
-        'description'   => esc_html__( 'Widgets added here will appear in the primary sidebar.', 'bloggyhassanazan' ),
+        'name'          => esc_html__( 'Primary Footer', 'bloggyhassanazan' ),
+        'id'            => 'primary-footer',
+        'description'   => esc_html__( 'Widgets added here will appear in the primary footer.', 'bloggyhassanazan' ),
         'before_widget' => '<div id="%1$s" class="widget %2$s">',
         'after_widget'  => '</div>',
         'before_title'  => '<h2 class="widget-title">',
@@ -348,5 +340,16 @@ function azan_theme_register_sidebars() {
 }
 
 add_action( 'widgets_init', 'azan_theme_register_sidebars' );
+
+// Get the value of the 'thread_comments' option
+$thread_comments_enabled = get_option('thread_comments');
+
+// Check if threaded comments are enabled
+if ($thread_comments_enabled) {
+    echo "Threaded comments are enabled.";
+} else {
+    echo "Threaded comments are disabled.";
+}
+
 
 ?>

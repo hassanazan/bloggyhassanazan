@@ -8,7 +8,7 @@ Description: Your theme description.
 version: 2.1
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Tags: blog, news, articles, blogger, blogging
+Tags: news, entertainment, blog, two-columns, theme-options, featured-images, custom-menu, custom-logo
 Tested up to: 5.0
 Requires PHP: 7.0
 */
@@ -147,4 +147,14 @@ article.post:last-of-type {
     display: block;
     margin-left: auto;
     margin-right: auto;
+}
+.screen-reader-text {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
 }
