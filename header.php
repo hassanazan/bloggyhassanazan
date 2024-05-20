@@ -20,14 +20,13 @@ $instagram_link = get_theme_mod('instagram_link', 'https://instagram.com/example
     <meta name="keywords" content="<?php bloginfo('name'); ?>">
     <meta name="description" content="<?php bloginfo('description'); ?>">
 
-<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-<link href="<?php echo esc_url(get_template_directory_uri()); ?>/lib/fa/css/all.min.css" rel="stylesheet">
-<link href="<?php echo esc_url(get_template_directory_uri()); ?>/css/style.css" rel="stylesheet">
-<link href="<?php echo esc_url(get_template_directory_uri()); ?>/style.css" rel="stylesheet">
 
     <?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
+<div id="skip-link">
+        <a href="#main-content" class="screen-reader-text"><?php esc_html_e( 'Skip to main content', 'bloggyhassanazan' ); ?></a>
+    </div>
 <?php wp_body_open(); ?>
 <div class="wrapper">
     <div class="sidebar">
@@ -75,10 +74,11 @@ $instagram_link = get_theme_mod('instagram_link', 'https://instagram.com/example
             <!-- Search Input -->
 <form class="form-inline my-2 my-lg-0" action="<?php echo esc_url(home_url('/')); ?>">
     <div class="input-group">
-        <div class="input-group-prepend">
-            <span class="input-group-text"><i class="fas fa-search"></i></span>
-        </div>
+        
         <input class="form-control" type="search" placeholder="Search" aria-label="Search" name="s">
+        <div class="input-group-prepend">
+            <button class="input-group-text"><i class="fas fa-search"></i></button>
+        </div>
     </div>
 </form>
 <!-- End Search Input -->

@@ -1,13 +1,6 @@
 <?php
-
-
 require_once("walker_class.php");
 
-function azan_custom_theme_assets() {
-    // Enqueue Open Sans font from Google Fonts
-    wp_enqueue_style('open-sans', 'https://fonts.googleapis.com/css2?family=Open+Sans:300;400;600;700;800&display=swap');
-}
-add_action('wp_enqueue_scripts', 'azan_custom_theme_assets');
 
 if (function_exists('add_theme_support')) {
     add_theme_support('post-thumbnails');
@@ -224,8 +217,6 @@ function render_featured_meta_box($post) {
 
     // Display checkbox
     echo '<label><input type="checkbox" name="is_featured" value="1" ' . checked($is_featured, '1', false) . '> ' . esc_html__("Mark as featured", "bloggyhassanazan") . '</label>';
-
-
 }
 
 // Save meta box data
@@ -322,6 +313,11 @@ function azan_my_theme_enqueue_scripts() {
     wp_enqueue_script('contact-script', get_template_directory_uri() . '/mail/contact.js', array('jquery'), '1.0', true);
     wp_enqueue_script('main-script', get_template_directory_uri() . '/js/main.js', array('jquery'), '1.0', true);
     wp_enqueue_script( 'comment-reply' );
+    wp_enqueue_style('load-style', get_template_directory_uri() . '/css/style.css');
+    wp_enqueue_style('load-style.css', get_template_directory_uri() . '/style.css');
+    wp_enqueue_style( 'load-fa', 'https://use.fontawesome.com/releases/v5.5.0/css/all.css' );
+    wp_enqueue_style('open-sans', 'https://fonts.googleapis.com/css2?family=Open+Sans:300;400;600;700;800&display=swap');
+
 }
 add_action('wp_enqueue_scripts', 'azan_my_theme_enqueue_scripts');
 
@@ -340,16 +336,4 @@ function azan_theme_register_sidebars() {
 }
 
 add_action( 'widgets_init', 'azan_theme_register_sidebars' );
-
-// Get the value of the 'thread_comments' option
-$thread_comments_enabled = get_option('thread_comments');
-
-// Check if threaded comments are enabled
-if ($thread_comments_enabled) {
-    echo "Threaded comments are enabled.";
-} else {
-    echo "Threaded comments are disabled.";
-}
-
-
 ?>

@@ -8,6 +8,7 @@
                 <div class="col-md-5">
                     <?php
                     $post_thumbnail_url = get_the_post_thumbnail_url(get_the_ID(), 'full');
+                    $default_image_url = get_template_directory_uri().'/img/no-image.png';
                     // Use default image if post thumbnail is empty
                     $thumbnail_url = !empty($post_thumbnail_url) ? $post_thumbnail_url : $default_image_url;
                     ?>

@@ -2,7 +2,6 @@
 class azan_Custom_Comments_Walker extends Walker_Comment {
     // Override the start of each comment output
     public function start_el( &$output, $comment, $depth = 0, $args = array(), $id = 0 ) {
-    
         $GLOBALS['comment'] = $comment;
         ?>
         <div id="comment-<?php comment_ID(); ?>" <?php comment_class('media mb-4'); ?>>
@@ -25,6 +24,7 @@ class azan_Custom_Comments_Walker extends Walker_Comment {
                     ?>
                     <!-- End Reply Form -->
                 </div>
+               
             
         <?php
     }
@@ -33,9 +33,8 @@ class azan_Custom_Comments_Walker extends Walker_Comment {
     public function end_el( &$output, $comment, $depth = 0, $args = array() ) {
         // Don't need to do anything here since we're not altering the end of each comment
         ?>
-        </div><!-- media mb-4 -->
+         </div><!-- media mb-4 -->
         </div><!-- media-body -->
-        
         <?php
     }
 }

@@ -2,10 +2,9 @@
 Theme Name: bloggyhassanazan
 Author: Azan
 Theme URI: https://github.com/hassanazan
-Author URI: https://github.com/hassanazan
 Text Domain: bloggyhassanazan
-Description: Your theme description.
-version: 2.1
+Description: a simple and fast blog, personal, journal theme.
+version: 1.1
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: news, entertainment, blog, two-columns, theme-options, featured-images, custom-menu, custom-logo
@@ -157,4 +156,17 @@ article.post:last-of-type {
     overflow: hidden;
     clip: rect(0, 0, 0, 0);
     border: 0;
+}
+#skip-link a {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background-color: #000;
+    color: #fff;
+    padding: 10px;
+    z-index: 9999;
+}
+
+#skip-link a:focus {
+    top: 0;
 }
