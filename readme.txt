@@ -1,16 +1,16 @@
-=== Theme Name ===
-Contributors: (comma-separated list of contributors)
-Tags: (comma-separated list of tags)
-Requires at least: WordPress version
-Tested up to: WordPress version
-Requires PHP: PHP version
-Stable tag: (e.g., 1.0)
+=== Bloggy Hassan Azan ===
+Contributors: hassanazan, johndoe
+Tags: one-column, right-sidebar, custom-logo, featured-images
+Requires at least: 5.0
+Tested up to: 6.0
+Requires PHP: 7.2
+Stable tag: 1.0
 
-Short description of your theme.
+Bloggy Hassan Azan is a clean, modern, and highly customizable WordPress theme perfect for bloggers and content creators.
 
 == Description ==
 
-Long description of your theme.
+Bloggy Hassan Azan offers a sleek and modern design with a focus on readability and user experience. The theme includes a customizable header, a featured content section, and multiple widget areas to showcase your content. Perfect for personal blogs, travel blogs, or any content-focused website.
 
 == Installation ==
 
@@ -29,16 +29,20 @@ This theme respects user privacy by disabling any data collection or tracking by
 == Frequently Asked Questions ==
 
 = Can I customize this theme? =
-Yes, you can customize the theme to fit your needs.
+Yes, you can customize the theme to fit your needs. You can modify the theme files or use the WordPress Customizer to make changes.
 
 == Screenshots ==
 
-Screenshot images here.
+1. screenshot.png
+   - Main screenshot showing the theme's homepage layout.
 
 == Credits ==
 
-Credits to contributors or resources used in the theme.
+* Theme development: Hassan Azan (hassanazan)
+* Design: John Doe (johndoe)
+* Icons: FontAwesome (https://fontawesome.com)
+* Images: Unsplash (https://unsplash.com)
 
 == License ==
 
-License information here.
+This theme is licensed under the GPL. You can distribute, modify, or sell it as long as you include the same license.

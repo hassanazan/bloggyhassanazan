@@ -42,6 +42,7 @@ body {
 .mr-2 > a {
     color: #f1f3ff;
 }
+
 p {
     line-height: 1.7em;
 }
@@ -75,7 +76,7 @@ article.post:last-of-type {
 .pagination a, .pagination span {
     display: inline-block;
     padding: 8px 16px;
-    text-decoration: none;
+    text-decoration: underline !important;
     color: #000;
     border: 1px solid #ccc;
     margin: 0 4px;
@@ -93,6 +94,7 @@ article.post:last-of-type {
 .pagination .next {
     margin-left: 10px;
 }
+
 .pagination .page-numbers.current {
     background-color: #007bff;
     color: #fff;
@@ -102,6 +104,7 @@ article.post:last-of-type {
 .white-link {
     color: white;
 }
+
 /* Style for WordPress caption */
 .wp-caption {
     margin-bottom: 1.5em;
@@ -147,6 +150,7 @@ article.post:last-of-type {
     margin-left: auto;
     margin-right: auto;
 }
+
 .screen-reader-text {
     position: absolute;
     width: 1px;
@@ -157,6 +161,7 @@ article.post:last-of-type {
     clip: rect(0, 0, 0, 0);
     border: 0;
 }
+
 #skip-link a {
     position: absolute;
     top: -40px;
@@ -167,6 +172,3 @@ article.post:last-of-type {
     z-index: 9999;
 }
 
-#skip-link a:focus {
-    top: 0;
-}

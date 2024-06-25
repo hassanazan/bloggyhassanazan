@@ -1,6 +1,6 @@
 <?php
 /*
- * Template Name: Content Template
+ * Template Name: Contact Page Template
  */
 
  get_header(); ?>
@@ -42,21 +42,21 @@
 <div class="col-md-12 pb-5">
     <div class="contact-form">
         <div id="success"></div>
-        <form name="sentMessage" id="contactForm" novalidate="novalidate">
+        <form name="sentMessage" id="contactForm" method="post" action="<?php echo esc_url(admin_url('admin-ajax.php')); ?>" novalidate="novalidate">
             <div class="control-group">
-                <input type="text" class="form-control" id="name" placeholder="<?php esc_attr_e('Your Name', 'bloggyhassanazan'); ?>" required="required" data-validation-required-message="<?php esc_attr_e('Please enter your name', 'bloggyhassanazan'); ?>">
+                <input type="text" class="form-control" id="name" name="name" placeholder="<?php esc_attr_e('Your Name', 'bloggyhassanazan'); ?>" required="required" data-validation-required-message="<?php esc_attr_e('Please enter your name', 'bloggyhassanazan'); ?>">
                 <p class="help-block text-danger"></p>
             </div>
             <div class="control-group">
-                <input type="email" class="form-control" id="email" placeholder="<?php esc_attr_e('Your Email', 'bloggyhassanazan'); ?>" required="required" data-validation-required-message="<?php esc_attr_e('Please enter your email', 'bloggyhassanazan'); ?>">
+                <input type="email" class="form-control" id="email" name="email" placeholder="<?php esc_attr_e('Your Email', 'bloggyhassanazan'); ?>" required="required" data-validation-required-message="<?php esc_attr_e('Please enter your email', 'bloggyhassanazan'); ?>">
                 <p class="help-block text-danger"></p>
             </div>
             <div class="control-group">
-                <input type="text" class="form-control" id="subject" placeholder="<?php esc_attr_e('Subject', 'bloggyhassanazan'); ?>" required="required" data-validation-required-message="<?php esc_attr_e('Please enter a subject', 'bloggyhassanazan'); ?>">
+                <input type="text" class="form-control" id="subject" name="subject" placeholder="<?php esc_attr_e('Subject', 'bloggyhassanazan'); ?>" required="required" data-validation-required-message="<?php esc_attr_e('Please enter a subject', 'bloggyhassanazan'); ?>">
                 <p class="help-block text-danger"></p>
             </div>
             <div class="control-group">
-                <textarea class="form-control" rows="8" id="message" placeholder="<?php esc_attr_e('Message', 'bloggyhassanazan'); ?>" required="required" data-validation-required-message="<?php esc_attr_e('Please enter your message', 'bloggyhassanazan'); ?>"></textarea>
+                <textarea class="form-control" rows="8" id="message" name="message" placeholder="<?php esc_attr_e('Message', 'bloggyhassanazan'); ?>" required="required" data-validation-required-message="<?php esc_attr_e('Please enter your message', 'bloggyhassanazan'); ?>"></textarea>
                 <p class="help-block text-danger"></p>
             </div>
             <div>
@@ -65,5 +65,6 @@
         </form>
     </div>
 </div>
+
 
 <?php get_footer(); ?>

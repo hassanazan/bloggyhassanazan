@@ -1,3 +1,6 @@
+<main id="main-content">
+    <!-- Your loop or main content goes here -->
+
 <?php
 $args = array(
     'post_type'      => 'post',
@@ -115,3 +118,4 @@ endif;
     </form>
 </div>
 <!-- Subscribe End -->
+</main>

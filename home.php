@@ -1,4 +1,7 @@
 <?php get_header(); ?>
+<main id="main-content">
+    <!-- Your loop or main content goes here -->
+
 <?php
 $default_image_url = get_template_directory_uri() . '/img/no-image.png';
 // Set the query parameters
@@ -142,5 +145,5 @@ $query = new WP_Query($query_args);
     ?>
 </div>
 
-
+</main>
 <?php get_footer(); ?>

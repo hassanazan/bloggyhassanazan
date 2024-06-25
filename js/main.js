@@ -49,3 +49,4 @@ function toggleReplyForm(commentID) {
         replyForm.style.display = 'none';
     }
 }
+

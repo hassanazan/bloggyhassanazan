@@ -1,4 +1,6 @@
 <?php get_header(); ?>
+<main id="main-content">
+    <!-- Your loop or main content goes here -->
 
 <div class="container py-5 px-2 bg-primary">
     <div class="row py-5 px-4">
@@ -88,7 +90,7 @@ while (have_posts()) : the_post();
     </div>
 <?php
 endwhile;
-
-
-get_footer();
+?>
+</main>
+<?php get_footer();
 ?>

@@ -32,7 +32,11 @@ $instagram_link = get_theme_mod('instagram_link', 'https://instagram.com/example
     <div class="sidebar">
         <div class="sidebar-text d-flex flex-column h-100 justify-content-center text-center">
             <img class="mx-auto d-block w-75 bg-primary img-fluid rounded-circle mb-4 p-3" src="<?php echo esc_url($sidebar_image_url); ?>" alt="<?php echo esc_attr__('Image', 'bloggyhassanazan'); ?>">
-            <h1 class="font-weight-bold"><?php echo esc_html(get_bloginfo('name')); ?></h1>
+            <h1 class="font-weight-bold">
+    <a href="<?php echo esc_url(home_url('/')); ?>">
+        <?php echo esc_html(get_bloginfo('name')); ?>
+    </a>
+</h1>
             <p class="mb-4"><?php echo esc_html(get_bloginfo('description')); ?></p>
             <div class="d-flex justify-content-center mb-5">
                 <a class="btn btn-outline-primary mr-2" href="<?php echo esc_url($twitter_link); ?>"><i class="fab fa-twitter"></i></a>

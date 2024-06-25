@@ -42,7 +42,7 @@ function azan_theme_customizer_settings($wp_customize) {
     }
 
     // Add control for uploading sidebar image
-    $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'sidebar_image_control', array(
+    $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'azan_sidebar_image_control', array(
         'label' => esc_html__('Sidebar Image', 'bloggyhassanazan'),
         'section' => 'title_tagline', // Change this section to wherever you want the control to appear
         'settings' => 'sidebar_image',
@@ -66,7 +66,7 @@ function azan_theme_customizer_settings($wp_customize) {
 
     // Add controls for social media links
     foreach ($social_media_links as $key => $label) {
-        $wp_customize->add_control($key . '_control', array(
+        $wp_customize->add_control($key . 'azan_control', array(
             'label' => $label,
             'section' => 'title_tagline', // Change this section to wherever you want the control to appear
             'settings' => $key,
@@ -211,9 +211,9 @@ function azan_add_featured_meta_box() {
 add_action('add_meta_boxes', 'azan_add_featured_meta_box');
 
 // Callback function to render the meta box
-function render_featured_meta_box($post) {
+function azan_render_featured_meta_box($post) {
     // Retrieve existing meta value if it exists
-    $is_featured = get_post_meta($post->ID, '_is_featured', true);
+    $is_featured = get_post_meta($post->ID, 'azan_is_featured', true);
 
     // Display checkbox
     echo '<label><input type="checkbox" name="is_featured" value="1" ' . checked($is_featured, '1', false) . '> ' . esc_html__("Mark as featured", "bloggyhassanazan") . '</label>';
@@ -226,18 +226,18 @@ function azan_save_featured_meta_box($post_id) {
     if (!current_user_can('edit_post', $post_id)) return;
 
     if (isset($_POST['is_featured'])) {
-        update_post_meta($post_id, '_is_featured', '1');
+        update_post_meta($post_id, 'azan_is_featured', '1');
     } else {
-        delete_post_meta($post_id, '_is_featured');
+        delete_post_meta($post_id, 'azan_is_featured');
     }
 }
 add_action('save_post', 'azan_save_featured_meta_box');
 
-function my_theme_setup() {
+function azan_my_theme_setup() {
     // Add support for automatic feed links
     add_theme_support( 'automatic-feed-links' );
 }
-add_action( 'after_setup_theme', 'my_theme_setup' );
+add_action( 'after_setup_theme', 'azan_my_theme_setup' );
 
 // Add custom text below the featured image in the post editor
 function azan_custom_featured_image_text($content, $post_id) {
@@ -305,18 +305,25 @@ function azan_my_theme_enqueue_scripts() {
     wp_enqueue_script('jquery');
 
     // Enqueue custom scripts
-    wp_enqueue_script('custom-script', get_template_directory_uri() . '/js/jquery-3.4.1.min.js', array('jquery'), '3.4.1', true);
-    wp_enqueue_script('bootstrap-script', get_template_directory_uri() . '/js/bootstrap.bundle.min.js', array('jquery'), '4.0', true);
-    wp_enqueue_script('easing-script', get_template_directory_uri() . '/lib/easing/easing.min.js', array(), '1.0', true);
-    wp_enqueue_script('waypoints-script', get_template_directory_uri() . '/lib/waypoints/waypoints.min.js', array('jquery'), '1.0', true);
-    wp_enqueue_script('contact-validation-script', get_template_directory_uri() . '/mail/jqBootstrapValidation.min.js', array('jquery'), '1.0', true);
-    wp_enqueue_script('contact-script', get_template_directory_uri() . '/mail/contact.js', array('jquery'), '1.0', true);
-    wp_enqueue_script('main-script', get_template_directory_uri() . '/js/main.js', array('jquery'), '1.0', true);
+    wp_enqueue_script('azan-custom-script', get_template_directory_uri() . '/js/jquery-3.4.1.min.js', array('jquery'), '3.4.1', true);
+    wp_enqueue_script('azan-bootstrap-script', get_template_directory_uri() . '/js/bootstrap.bundle.min.js', array('jquery'), '4.0', true);
+    wp_enqueue_script('azan-easing-script', get_template_directory_uri() . '/lib/easing/easing.min.js', array(), '1.0', true);
+    wp_enqueue_script('azan-waypoints-script', get_template_directory_uri() . '/lib/waypoints/waypoints.min.js', array('jquery'), '1.0', true);
+    wp_enqueue_script('azan-contact-form-script', get_template_directory_uri() . '/mail/contact.js', array('jquery'), null, true);
+    
+    wp_localize_script('azan-contact-form-script', 'contactFormParams', array(
+        'ajaxurl' => admin_url('admin-ajax.php'),
+        'successMessage' => __('Message sent successfully!', 'bloggyhassanazan'),
+        'errorMessage' => __('There was an error sending your message. Please try again.', 'bloggyhassanazan'),
+    ));
+    wp_enqueue_script('azan-main-script', get_template_directory_uri() . '/js/main.js', array('jquery'), '1.0', true);
+    //wp_enqueue_script('contact-form-script', get_template_directory_uri() . '/js/contact-form.js', array('jquery'), null, true);
+    wp_localize_script('contact-form-script', 'ajaxurl', admin_url('admin-ajax.php'));
     wp_enqueue_script( 'comment-reply' );
-    wp_enqueue_style('load-style', get_template_directory_uri() . '/css/style.css');
-    wp_enqueue_style('load-style.css', get_template_directory_uri() . '/style.css');
-    wp_enqueue_style( 'load-fa', 'https://use.fontawesome.com/releases/v5.5.0/css/all.css' );
-    wp_enqueue_style('open-sans', 'https://fonts.googleapis.com/css2?family=Open+Sans:300;400;600;700;800&display=swap');
+    wp_enqueue_style('azan-load-style', get_template_directory_uri() . '/css/style.css');
+    wp_enqueue_style('azan-load-style.css', get_template_directory_uri() . '/style.css');
+    wp_enqueue_style( 'azan-load-fa', 'https://use.fontawesome.com/releases/v5.5.0/css/all.css' );
+    wp_enqueue_style('azan-open-sans', 'https://fonts.googleapis.com/css2?family=Open+Sans:300;400;600;700;800&display=swap');
 
 }
 add_action('wp_enqueue_scripts', 'azan_my_theme_enqueue_scripts');
@@ -336,4 +343,45 @@ function azan_theme_register_sidebars() {
 }
 
 add_action( 'widgets_init', 'azan_theme_register_sidebars' );
+
+function handle_contact_form() {
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['name']) && isset($_POST['email']) && isset($_POST['subject']) && isset($_POST['message'])) {
+        $name = sanitize_text_field($_POST['name']);
+        $email = sanitize_email($_POST['email']);
+        $subject = sanitize_text_field($_POST['subject']);
+        $message = sanitize_textarea_field($_POST['message']);
+        
+        // Validate email
+        if (!is_email($email)) {
+            wp_send_json_error(__('Invalid email address.', 'bloggyhassanazan'));
+        }
+        
+        // Prepare email
+        $to = get_option('admin_email'); // Change this to the desired email address
+        $headers = array('Content-Type: text/html; charset=UTF-8');
+        $body = "
+            <p><strong>Name:</strong> {$name}</p>
+            <p><strong>Email:</strong> {$email}</p>
+            <p><strong>Subject:</strong> {$subject}</p>
+            <p><strong>Message:</strong><br>{$message}</p>
+        ";
+        
+        // Send email
+        $mail_sent = wp_mail($to, $subject, $body, $headers);
+        
+        // Handle success or failure
+        if ($mail_sent) {
+            wp_send_json_success(__('Message sent successfully!', 'bloggyhassanazan'));
+        } else {
+            wp_send_json_error(__('There was an error sending your message. Please try again.', 'bloggyhassanazan'));
+        }
+    } else {
+        wp_send_json_error(__('All fields are required.', 'bloggyhassanazan'));
+    }
+}
+add_action('wp_ajax_contact_form', 'handle_contact_form');
+add_action('wp_ajax_nopriv_contact_form', 'handle_contact_form');
+
+
+
 ?>

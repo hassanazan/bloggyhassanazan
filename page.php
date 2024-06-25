@@ -1,6 +1,8 @@
 <?php
 get_header();
 ?>
+<main id="main-content">
+    <!-- Your loop or main content goes here -->
 
 <div class="container py-5 px-2 bg-primary">
     <div class="row py-5 px-4">
@@ -59,7 +61,7 @@ get_header();
     
 </div>
 <div class="page-content">
-    <?php the_content(); ?>
+    
     <?php wp_link_pages(array(
         'before'      => '<div class="pagination">' . __('Pages:', 'bloggyhassanazan'),
         'after'       => '</div>',
@@ -69,6 +71,7 @@ get_header();
         'separator'   => '<span class="screen-reader-text">, </span>',
     )); ?>
 </div>
+</main>
 <?php
 get_footer();
 ?>
