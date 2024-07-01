@@ -41,7 +41,7 @@ Yes, you can customize the theme to fit your needs. You can modify the theme fil
 * Theme development: Hassan Azan (hassanazan)
 * Design: John Doe (johndoe)
 * Icons: FontAwesome (https://fontawesome.com)
-* Images: Unsplash (https://unsplash.com)
+
 
 == License ==
 
