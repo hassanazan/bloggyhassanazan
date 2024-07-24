@@ -5,7 +5,7 @@
     wp_list_comments(array(
         'style' => 'div',
         'avatar_size' => 60,
-        'walker' => new azan_Custom_Comments_Walker(), // Use your custom walker class
+        'walker' => new bloggyhassanazan_Custom_Comments_Walker(), // Use your custom walker class
     ));
     ?>
     <!-- Custom HTML Ends -->

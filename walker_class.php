@@ -1,5 +1,5 @@
 <?php
-class azan_Custom_Comments_Walker extends Walker_Comment {
+class bloggyhassanazan_Custom_Comments_Walker extends Walker_Comment {
     // Override the start of each comment output
     public function start_el( &$output, $comment, $depth = 0, $args = array(), $id = 0 ) {
         $GLOBALS['comment'] = $comment;

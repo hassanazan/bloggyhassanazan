@@ -1,12 +1,18 @@
-=== Bloggy Hassan Azan ===
-Contributors: hassanazan, johndoe
-Tags: one-column, right-sidebar, custom-logo, featured-images
+/*
+Theme Name: Bloggy Hassan Azan
+Theme URI: http://example.com/bloggy-hassan-azan
+Author: Hassan Azan
+Author URI: http://example.com
+Contributors: hassanazan
+Tags: one-column, custom-logo, featured-images
 Requires at least: 5.0
 Tested up to: 6.0
 Requires PHP: 7.2
 Stable tag: 1.0
-
-Bloggy Hassan Azan is a clean, modern, and highly customizable WordPress theme perfect for bloggers and content creators.
+License: GPLv2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Description: Bloggy Hassan Azan is a clean, modern, and highly customizable WordPress theme perfect for bloggers and content creators. It features a sleek and modern design with a focus on readability and user experience. The theme includes a customizable header, a featured content section, and multiple widget areas to showcase your content. Perfect for personal blogs, travel blogs, or any content-focused website.
+*/
 
 == Description ==
 
@@ -36,13 +42,21 @@ Yes, you can customize the theme to fit your needs. You can modify the theme fil
 1. screenshot.png
    - Main screenshot showing the theme's homepage layout.
 
+== Upgrade Notice ==
+
+= 1.0 =
+* Initial release. No upgrades yet.
+
+== Donate ==
+
+If you find this theme useful and would like to support further development, you can make a donation via PayPal to [your-email@example.com](mailto:your-email@example.com).
+
 == Credits ==
 
 * Theme development: Hassan Azan (hassanazan)
 * Design: John Doe (johndoe)
 * Icons: FontAwesome (https://fontawesome.com)
 
-
 == License ==
 
-This theme is licensed under the GPL. You can distribute, modify, or sell it as long as you include the same license.
+This theme is licensed under the GPLv2 or later. You can distribute, modify, or sell it as long as you include the same license.

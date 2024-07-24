@@ -69,7 +69,7 @@ $instagram_link = get_theme_mod('instagram_link', 'https://instagram.com/example
                         'menu_class' => 'navbar-nav m-auto',
                         'items_wrap' => '%3$s',
                         'fallback_cb' => false, // Disable fallback menu
-                        'walker' => new azan_WPDocs_Walker_Nav_Menu(),
+                        'walker' => new bloggyhassanazan_WPDocs_Walker_Nav_Menu(),
                     ));
                 }
                 ?>
