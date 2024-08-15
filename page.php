@@ -1,77 +1,96 @@
-<?php
-get_header();
-?>
+<?php get_header(); ?>
 <main id="main-content">
     <!-- Your loop or main content goes here -->
 
-<div class="container py-5 px-2 bg-primary">
-    <div class="row py-5 px-4">
-        <div class="col-sm-6 text-center text-md-left">
-            <h1 class="mb-3 mb-md-0 text-white text-uppercase font-weight-bold"><?php single_post_title(); ?></h1>
-        </div>
-        <div class="col-sm-6 text-center text-md-right">
-            <div class="d-inline-flex pt-2">
-                <h4 class="m-0 text-white"><a class="text-white" href="<?php echo esc_url(home_url()); ?>"><?php esc_html_e('Home', 'bloggyhassanazan'); ?></a></h4>
-                <h4 class="m-0 text-white px-2">/</h4>
-                <h4 class="m-0 text-white"><?php single_post_title(); ?></h4>
+    <div class="container py-5 px-2 bg-primary">
+        <div class="row py-5 px-4">
+            <div class="col-sm-6 text-center text-md-left">
+                <h1 class="mb-3 mb-md-0 text-white text-uppercase font-weight-bold"><?php esc_html_e('Blog Detail', 'bloggyhassanazan'); ?></h1>
+            </div>
+            <div class="col-sm-6 text-center text-md-right">
+                <div class="d-inline-flex pt-2">
+                    <h4 class="m-0 text-white"><a class="text-white" href="<?php echo esc_url(home_url()); ?>"><?php esc_html_e('Home', 'bloggyhassanazan'); ?></a></h4>
+                    <h4 class="m-0 text-white px-2">/</h4>
+                    <h4 class="m-0 text-white"><?php esc_html_e('Blog Detail', 'bloggyhassanazan'); ?></h4>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<div class="container bg-white pt-5">
     <?php
-    // Query posts
-    $args = array(
-        'post_type' => 'post',
-        'posts_per_page' => 6, // Number of posts to display
-    );
-    $query = new WP_Query($args);
-
-    // Check if there are posts
-    if ($query->have_posts()) :
-        // Loop through posts
-        while ($query->have_posts()) : $query->the_post();
+    // Start the loop
+    while (have_posts()) : the_post();
     ?>
-            <div class="row blog-item px-3 pb-5">
-                <div class="col-md-5">
-                    <img class="img-fluid mb-4 mb-md-0" src="<?php echo esc_url(get_the_post_thumbnail_url()); ?>" alt="<?php the_title_attribute(); ?>">
-                </div>
-                <div class="col-md-7">
-                    <h3 class="mt-md-4 px-md-3 mb-2 py-2 bg-white font-weight-bold"><?php the_title(); ?></h3>
-                    <div class="d-flex mb-3">
-                        <small class="mr-2 text-muted"><i class="fa fa-calendar-alt"></i> <?php echo esc_html(get_the_date('d-M-Y')); ?></small>
-                        <small class="mr-2 text-muted"><i class="fa fa-folder"></i> <?php the_category(', '); ?></small>
-                        <small class="mr-2 text-muted"><i class="fa fa-comments"></i> <?php echo esc_html(get_comments_number()); ?> <?php esc_html_e('Comments', 'bloggyhassanazan'); ?></small>
+        <div class="container py-5 px-2 bg-white">
+            <div class="row px-4">
+                <div class="col-12">
+                    <img class="img-fluid mb-4" src="<?php echo esc_url(get_the_post_thumbnail_url(get_the_ID(), 'large')); ?>" alt="<?php echo esc_attr(get_the_title()); ?>">
+                    <h2 class="mb-3 font-weight-bold"><?php the_title(); ?></h2>
+                    <div class="d-flex">
+                        <p class="mr-3 text-muted"><i class="fa fa-calendar-alt"></i> <?php echo esc_html(get_the_date('d-M-Y')); ?></p>
+                        <p class="mr-3 text-muted"><i class="fa fa-folder"></i> <?php the_category(', '); ?></p>
+                        <p class="mr-3 text-muted"><i class="fa fa-comments"></i> <?php comments_number(); ?> <?php esc_html_e('Comments', 'bloggyhassanazan'); ?></p>
                     </div>
-                    <p>
-                        <?php the_excerpt(); ?>
-                    </p>
-                    <a class="btn btn-link p-0" href="<?php the_permalink(); ?>"><?php esc_html_e('Read More', 'bloggyhassanazan'); ?> <i class="fa fa-angle-right"></i></a>
+                    <?php the_content(); ?>
+
+                    <?php
+                    wp_link_pages(array(
+                        'before' => '<div class="page-links">' . esc_html__('Pages:', 'bloggyhassanazan'),
+                        'after'  => '</div>',
+                    ));
+                    ?>
+
+                    <?php
+                    // Display post tags
+                    $tags = get_the_tags();
+                    if ($tags) {
+                        echo '<div class="mb-3">';
+                        echo '<span class="font-weight-bold mr-2">' . esc_html__('Tags:', 'bloggyhassanazan') . '</span>';
+                        foreach ($tags as $tag) {
+                            $tag_link = get_tag_link($tag->term_id);
+                            echo '<a href="' . esc_url($tag_link) . '" class="badge badge-secondary mr-2">' . esc_html($tag->name) . '</a>';
+                        }
+                        echo '</div>';
+                    }
+                    ?>
+
                 </div>
+
+                <div class="col-12 py-4">
+                    <?php
+                    // Check if there are previous or next posts
+                    $prev_post = get_previous_post();
+                    $next_post = get_next_post();
+
+                    if ($prev_post || $next_post) {
+                        echo '<div class="btn-group btn-group-lg w-100">';
+
+                        // Previous post button
+                        if ($prev_post) {
+                            echo '<a href="' . esc_url(get_permalink($prev_post->ID)) . '" class="btn btn-outline-primary"><i class="fa fa-angle-left mr-2"></i> ' . esc_html__('Previous', 'bloggyhassanazan') . '</a>';
+                        }
+
+                        // Next post button
+                        if ($next_post) {
+                            echo '<a href="' . esc_url(get_permalink($next_post->ID)) . '" class="btn btn-outline-primary">' . esc_html__('Next', 'bloggyhassanazan') . ' <i class="fa fa-angle-right ml-2"></i></a>';
+                        }
+
+                        echo '</div>';
+                    }
+                    ?>
+                </div>
+
+                <?php
+                // Check if comments are open or we have at least one comment.
+                if (comments_open() || get_comments_number()) :
+                    comments_template();
+                endif;
+                ?>
+                
             </div>
+        </div>
     <?php
-        endwhile;
-        wp_reset_postdata(); // Reset post data
-    else :
-        // If no posts are found
-        echo '<p>' . esc_html__('No posts found.', 'bloggyhassanazan') . '</p>';
-    endif;
+    endwhile;
     ?>
-    
-</div>
-<div class="page-content">
-    
-    <?php wp_link_pages(array(
-        'before'      => '<div class="pagination">' . __('Pages:', 'bloggyhassanazan'),
-        'after'       => '</div>',
-        'link_before' => '<span>',
-        'link_after'  => '</span>',
-        'pagelink'    => '<span class="screen-reader-text">' . __('Page', 'bloggyhassanazan') . ' </span>%',
-        'separator'   => '<span class="screen-reader-text">, </span>',
-    )); ?>
-</div>
 </main>
-<?php
-get_footer();
-?>
+<?php get_footer(); ?>

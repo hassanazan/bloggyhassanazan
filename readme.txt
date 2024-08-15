@@ -1,6 +1,6 @@
 /*
 Theme Name: Bloggy Hassan Azan
-Theme URI: http://example.com/bloggy-hassan-azan
+Theme URI: http://example.com/bloggyhassanazan
 Author: Hassan Azan
 Author URI: http://example.com
 Contributors: hassanazan

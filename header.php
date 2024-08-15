@@ -17,15 +17,13 @@ $instagram_link = get_theme_mod('instagram_link', 'https://instagram.com/example
 <head>
     <meta charset="<?php bloginfo('charset'); ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="keywords" content="<?php bloginfo('name'); ?>">
-    <meta name="description" content="<?php bloginfo('description'); ?>">
 
 
     <?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
 <div id="skip-link">
-        <a href="#main-content" class="screen-reader-text"><?php esc_html_e( 'Skip to main content', 'bloggyhassanazan' ); ?></a>
+<a href="<?php echo esc_url( home_url() ); ?>" class="screen-reader-text"><?php esc_html_e( 'Skip to main content', 'bloggyhassanazan' ); ?></a>
     </div>
 <?php wp_body_open(); ?>
 <div class="wrapper">

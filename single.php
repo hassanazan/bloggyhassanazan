@@ -33,11 +33,7 @@ while (have_posts()) : the_post();
                 </div>
                 <?php the_content(); ?>
 
-                <!-- Custom HTML Starts -->
- <h2 class="mb-3 font-weight-bold"><?php the_title(); ?></h2>
-                <img class="w-50 float-left mr-4 mb-3" src="<?php echo esc_url(get_the_post_thumbnail_url(get_the_ID(), 'large')); ?>" alt="Featured Image">
-                <?php the_content(); ?>
-                <!-- Custom HTML Ends -->
+               
 
                 <?php
                 // Display post tags

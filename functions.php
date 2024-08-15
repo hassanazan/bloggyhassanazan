@@ -305,22 +305,14 @@ function bloggyhassanazan_my_theme_enqueue_scripts() {
     wp_enqueue_script('jquery');
 
     // Enqueue custom scripts
-    wp_enqueue_script('bloggyhassanazan-custom-script', get_template_directory_uri() . '/js/jquery-3.4.1.min.js', array('jquery'), '3.4.1', true);
     wp_enqueue_script('bloggyhassanazan-bootstrap-script', get_template_directory_uri() . '/js/bootstrap.bundle.min.js', array('jquery'), '4.0', true);
     wp_enqueue_script('bloggyhassanazan-easing-script', get_template_directory_uri() . '/lib/easing/easing.min.js', array(), '1.0', true);
     wp_enqueue_script('bloggyhassanazan-waypoints-script', get_template_directory_uri() . '/lib/waypoints/waypoints.min.js', array('jquery'), '1.0', true);
-    wp_enqueue_script('bloggyhassanazan-contact-form-script', get_template_directory_uri() . '/mail/contact.js', array('jquery'), null, true);
-    
-     wp_localize_script('bloggyhassanazan-contact-form-script', 'contactFormParams', array(
-         'ajaxurl' => admin_url('admin-ajax.php'),
-         'successMessage' => __('Message sent successfully!', 'bloggyhassanazan'),
-         'errorMessage' => __('There was an error sending your message. Please try again.', 'bloggyhassanazan'),
-     ));
-    wp_enqueue_script('bloggyhassanazan-main-script', get_template_directory_uri() . '/js/main.js', array('jquery'), '1.0', true);
+    wp_enqueue_script('bloggyhassanazan-main-script', get_template_directory_uri() . '/js/main.js', array('jquery'), '1.121', true);
     
     wp_enqueue_script( 'comment-reply' );
     wp_enqueue_style('bloggyhassanazan-load-style', get_template_directory_uri() . '/css/style.css');
-    wp_enqueue_style('bloggyhassanazan-load-style.css', get_template_directory_uri() . '/style.css');
+    wp_enqueue_style('bloggyhassanazan-load-style.css', get_template_directory_uri() . '/style.css?v=1');
     wp_enqueue_style( 'bloggyhassanazan-load-fa', 'https://use.fontawesome.com/releases/v5.5.0/css/all.css' );
     wp_enqueue_style('bloggyhassanazan-open-sans', 'https://fonts.googleapis.com/css2?family=Open+Sans:300;400;600;700;800&display=swap');
 
@@ -342,44 +334,6 @@ function bloggyhassanazan_theme_register_sidebars() {
 }
 
 add_action( 'widgets_init', 'bloggyhassanazan_theme_register_sidebars' );
-
-function bloggyhassanazan_handle_contact_form() {
-    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['name']) && isset($_POST['email']) && isset($_POST['subject']) && isset($_POST['message'])) {
-        $name = sanitize_text_field($_POST['name']);
-        $email = sanitize_email($_POST['email']);
-        $subject = sanitize_text_field($_POST['subject']);
-        $message = sanitize_textarea_field($_POST['message']);
-        
-        // Validate email
-        if (!is_email($email)) {
-            wp_send_json_error(__('Invalid email address.', 'bloggyhassanazan'));
-        }
-        
-        // Prepare email
-        $to = get_option('admin_email'); // Change this to the desired email address
-        $headers = array('Content-Type: text/html; charset=UTF-8');
-        $body = "
-            <p><strong>Name:</strong> {$name}</p>
-            <p><strong>Email:</strong> {$email}</p>
-            <p><strong>Subject:</strong> {$subject}</p>
-            <p><strong>Message:</strong><br>{$message}</p>
-        ";
-        
-        // Send email
-        $mail_sent = wp_mail($to, $subject, $body, $headers);
-        
-        // Handle success or failure
-        if ($mail_sent) {
-            wp_send_json_success(__('Message sent successfully!', 'bloggyhassanazan'));
-        } else {
-            wp_send_json_error(__('There was an error sending your message. Please try again.', 'bloggyhassanazan'));
-        }
-    } else {
-        wp_send_json_error(__('All fields are required.', 'bloggyhassanazan'));
-    }
-}
-add_action('wp_ajax_contact_form', 'bloggyhassanazan_handle_contact_form');
-add_action('wp_ajax_nopriv_contact_form', 'bloggyhassanazan_handle_contact_form');
 
 
 

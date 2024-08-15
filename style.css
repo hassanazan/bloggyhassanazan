@@ -5,7 +5,7 @@ Author URI: https://wa.me/+923164984429
 Theme URI: https://github.com/hassanazan
 Text Domain: bloggyhassanazan
 Description: a simple and fast blog, personal, journal theme.
-version: 1.6
+version: 1.7
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: news, entertainment, blog, two-columns, theme-options, featured-images, custom-menu, custom-logo
@@ -41,7 +41,7 @@ body {
 }
 
 .mr-2 > a {
-    color: #f1f3ff;
+    color: #0021e5;
 }
 
 p {
@@ -172,4 +172,19 @@ article.post:last-of-type {
     padding: 10px;
     z-index: 9999;
 }
+
+/* Enable Bootstrap dropdown on hover */
+.navbar .dropdown:hover>.dropdown-menu,
+.navbar .dropdown:focus-within>.dropdown-menu {
+    display: block;
+    margin-top: 0; /* remove the gap so it doesn't close */
+}
+.nav-item.dropdown:hover > .dropdown-menu {
+    display: block;
+}
+
+/* Style for touch devices */
+/* .navbar .dropdown-menu.show {
+    display: block;
+} */
 
