@@ -1,6 +1,4 @@
-<div id="primary-footer" class="footer-widget bg-white">
-    <?php dynamic_sidebar( 'primary-footer' ); ?>
-</div>
+<?php get_sidebar();?>
 <!-- Footer Start -->
 <div class="container py-4 bg-secondary text-center">
     <p class="m-0 text-white">

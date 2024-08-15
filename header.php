@@ -22,9 +22,8 @@ $instagram_link = get_theme_mod('instagram_link', 'https://instagram.com/example
     <?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
-<div id="skip-link">
-<a href="<?php echo esc_url( home_url() ); ?>" class="screen-reader-text"><?php esc_html_e( 'Skip to main content', 'bloggyhassanazan' ); ?></a>
-    </div>
+<a class="skip-link screen-reader-text" href="#main-content">
+<?php _e( 'Skip to content', 'bloggyhassanazan' ); ?></a>
 <?php wp_body_open(); ?>
 <div class="wrapper">
     <div class="sidebar">
